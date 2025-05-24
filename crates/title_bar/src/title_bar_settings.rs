@@ -50,7 +50,9 @@ impl Settings for TitleBarSettings {
     where
         Self: Sized,
     {
-        sources.json_merge()
+        let mut settings: TitleBarSettings = sources.json_merge()?;
+        settings.show_sign_in = false; // hardcoded override
+        Ok(settings)
     }
 
     fn import_from_vscode(_: &settings::VsCodeSettings, _: &mut Self::FileContent) {}
