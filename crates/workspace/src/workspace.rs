@@ -5765,6 +5765,7 @@ impl Render for Workspace {
 
         let theme = cx.theme().clone();
         let colors = theme.colors();
+        let show_status_bar = WorkspaceSettings::get_global(cx).show_status_bar;
         let notification_entities = self
             .notifications
             .iter()
@@ -6160,7 +6161,11 @@ impl Render for Workspace {
                                 }))
                                 .children(self.render_notifications(window, cx)),
                         )
-                        .child(self.status_bar.clone())
+                        .children(if show_status_bar {
+                            Some(self.status_bar.clone())
+                        } else {
+                            None
+                        })
                         .child(self.modal_layer.clone())
                         .child(self.toast_layer.clone()),
                 ),

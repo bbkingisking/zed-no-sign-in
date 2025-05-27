@@ -26,6 +26,7 @@ pub struct WorkspaceSettings {
     pub max_tabs: Option<NonZeroUsize>,
     pub when_closing_with_no_tabs: CloseWindowWhenNoItems,
     pub on_last_window_closed: OnLastWindowClosed,
+    pub show_status_bar: bool,
 }
 
 #[derive(Copy, Clone, Default, Serialize, Deserialize, JsonSchema)]
@@ -197,6 +198,10 @@ pub struct WorkspaceSettingsContent {
     ///
     /// Default: auto (nothing on macOS, "app quit" otherwise)
     pub on_last_window_closed: Option<OnLastWindowClosed>,
+    /// Whether to show the status bar at the bottom of the window.
+    ///
+    /// Default: true
+    pub show_status_bar: Option<bool>,
 }
 
 #[derive(Deserialize)]
